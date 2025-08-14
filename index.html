@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasty Bites - Premium Restaurant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Enhanced Base Styles */
+        :root {
+            --primary: #e74c3c;
+            --primary-dark: #c0392b;
+            --secondary: #2c3e50;
+            --light: #f9f9f9;
+            --dark: #333;
+            --gray: #666;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        .logo h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .navbar ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .navbar ul li a:hover::after,
+        .navbar ul li a.active::after {
+            width: 100%;
+        }
+
+        .navbar ul li a:hover,
+        .navbar ul li a.active {
+            color: var(--primary);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--dark);
+            z-index: 1001;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 150%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+
+        .menu::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="1" d="M0,224L48,218.7C96,213,192,203,288,181.3C384,160,480,128,576,138.7C672,149,768,203,864,208C960,213,1056,171,1152,149.3C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat center bottom;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .menu-item {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-item .image-container {
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .menu-item .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .menu-item .item-content {
+            padding: 25px;
+        }
+
+        .menu-item h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-item p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .price {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .add-to-cart {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: #f9f9f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23f9f9f9" fill-opacity="1" d="M0,224L48,218.7C96,213,192,203,288,181.3C384,160,480,128,576,138.7C672,149,768,203,864,208C960,213,1056,171,1152,149.3C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat center bottom;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .stat-item .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-item .label {
+            font-size: 1rem;
+            color: var(--secondary);
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .about-image img {
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 10px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: var(--transition);
+        }
+
+        .info-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .info-item i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-right: 20px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .info-content h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .info-content p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #f9f9f9;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
+            color: white;
+        }
+
+        .gallery .section-title {
+            color: white;
+        }
+
+        .gallery .section-title::after {
+            background: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: var(--transition);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(231, 76, 60, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: #f9f9f9;
+            text-align: center;
+        }
+
+        .testimonial-container {
+            max-width: 800px;
+            margin: 50px auto 0;
+            position: relative;
+        }
+
+        .testimonial-slide {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            margin: 0 20px;
+        }
+
+        .testimonial-content {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .author-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+            border: 3px solid var(--primary);
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a2530 0%, #0d1218 100%);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%231a2530" fill-opacity="1" d="M0,224L48,218.7C96,213,192,203,288,181.3C384,160,480,128,576,138.7C672,149,768,203,864,208C960,213,1056,171,1152,149.3C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat center bottom;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo h2 {
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .footer-logo p {
+            color: #bbb;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .footer-title {
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links ul li a i {
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .opening-hours p {
+            color: #bbb;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .opening-hours p span {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .newsletter p {
+            color: #bbb;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #bbb;
+        }
+
+        .newsletter-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: var(--primary-dark);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+            
+            .testimonial-container {
+                padding: 0 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                transition: all 0.4s ease;
+                z-index: 999;
+                padding: 80px 30px 30px;
+            }
+            
+            .navbar.active {
+                right: 0;
+            }
+            
+            .navbar ul {
+                flex-direction: column;
+            }
+            
+            .navbar ul li {
+                margin: 0 0 25px 0;
+            }
+            
+            .mobile-menu-button {
+                display: block;
+                position: fixed;
+                top: 25px;
+                right: 25px;
+                z-index: 1000;
+            }
+            
+            .hero {
+                margin-top: 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h2><i class="fas fa-utensils"></i> Tasty Bites</h2>
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="animate__animated animate__fadeInDown">Premium Culinary Experience</h1>
+                <p class="animate__animated animate__fadeInUp">Discover exquisite flavors crafted by our award-winning chefs using the finest local ingredients.</p>
+                <a href="#menu" class="btn floating animate__animated animate__pulse animate__infinite">Explore Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2 class="section-title">Specialty Menu</h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Burger">
+                        <div class="popular-badge">Chef's Choice</div>
+                    </div>
+                    <div class="item-content">
+                        <h3>Deluxe Burger <span class="price">$14.99</span></h3>
+                        <p>Premium beef patty with aged cheddar, smoked bacon, caramelized onions, and truffle aioli</p>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Pizza">
+                        <div class="popular-badge">Best Seller</div>
+                    </div>
+                    <div class="item-content">
+                        <h3>Truffle Pizza <span class="price">$18.99</span></h3>
+                        <p>Artisan crust with wild mushrooms, fontina cheese, truffle oil, and fresh arugula</p>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Pasta">
+                    </div>
+                    <div class="item-content">
+                        <h3>Lobster Pasta <span class="price">$24.99</span></h3>
+                        <p>Fresh linguine with Maine lobster, cherry tomatoes, and saffron cream sauce</p>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Salad">
+                        <div class="popular-badge">Healthy</div>
+                    </div>
+                    <div class="item-content">
+                        <h3>Quinoa Bowl <span class="price">$15.99</span></h3>
+                        <p>Organic quinoa with roasted vegetables, avocado, hemp seeds, and lemon tahini</p>
+                        <button class="add-to-cart">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Food Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Restaurant">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Dessert">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Steak">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Breakfast">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Founded in 2010 by award-winning chef Marco Bellini, Tasty Bites began as a small bistro with big dreams. Today, we've grown into a culinary destination known for innovative cuisine that honors traditional techniques while embracing modern flavors.</p>
+                    <p>Our commitment to sustainability drives every decision we make. We partner with local farms that practice regenerative agriculture and source seafood from certified sustainable fisheries. Our zero-waste kitchen philosophy means we utilize every part of our ingredients creatively.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="number">13+</div>
+                            <div class="label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="number">42</div>
+                            <div class="label">Local Suppliers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="number">15</div>
+                            <div class="label">Awards Won</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="number">98%</div>
+                            <div class="label">Customer Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Restaurant Interior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Customer Reviews</h2>
+            <div class="testimonial-container">
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        "The culinary experience at Tasty Bites is unparalleled. Every dish tells a story of passion and expertise. The seafood pasta was the best I've ever had - perfectly cooked with an exquisite sauce."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Reviewer">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Johnson</h4>
+                            <p>Food Critic</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Reserve a Table</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="info-content">
+                            <h3>Location</h3>
+                            <p>123 Gourmet Avenue, Culinary District, CD 12345</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div class="info-content">
+                            <h3>Phone</h3>
+                            <p>(555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <p>reservations@tastybites.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="info-content">
+                            <h3>Opening Hours</h3>
+                            <p>Monday-Friday: 11am - 10pm<br>Saturday-Sunday: 10am - 11pm</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Your Phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Reservation Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Reservation Time</label>
+                        <select id="time" required>
+                            <option value="">Select Time</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="13:00">1:00 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="18:00">6:00 PM</option>
+                            <option value="19:00">7:00 PM</option>
+                            <option value="20:00">8:00 PM</option>
+                            <option value="21:00">9:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Number of Guests</label>
+                        <select id="guests" required>
+                            <option value="">Select Guests</option>
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5 People</option>
+                            <option value="6">6 People</option>
+                            <option value="7">7+ People</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Book Reservation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <h2><i class="fas fa-utensils"></i> Tasty Bites</h2>
+                        <p>Premium dining experience with locally sourced ingredients and innovative culinary techniques since 2010.</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#menu"><i class="fas fa-chevron-right"></i> Menu</a></li>
+                        <li><a href="#gallery"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="opening-hours">
+                    <h3 class="footer-title">Opening Hours</h3>
+                    <p>Monday <span>11am - 10pm</span></p>
+                    <p>Tuesday <span>11am - 10pm</span></p>
+                    <p>Wednesday <span>11am - 10pm</span></p>
+                    <p>Thursday <span>11am - 10pm</span></p>
+                    <p>Friday <span>11am - 11pm</span></p>
+                    <p>Saturday <span>10am - 11pm</span></p>
+                    <p>Sunday <span>10am - 9pm</span></p>
+                </div>
+                <div class="newsletter">
+                    <h3 class="footer-title">Newsletter</h3>
+                    <p>Subscribe to receive special offers, menu updates, and event invitations.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email Address">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Tasty Bites Restaurant. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #e74c3c;"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Enhanced Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active navigation link
+                    document.querySelectorAll('.navbar ul li a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Close mobile menu if open
+                    if (navbar.classList.contains('active')) {
+                        navbar.classList.remove('active');
+                        mobileMenuOverlay.classList.remove('active');
+                        mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Mobile Menu Elements
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const navbar = document.querySelector('.navbar');
+        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+        
+        // Mobile Menu Toggle
+        mobileMenuButton.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent event from bubbling to document
+            
+            navbar.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            
+            this.innerHTML = navbar.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close menu when clicking overlay
+        mobileMenuOverlay.addEventListener('click', function() {
+            navbar.classList.remove('active');
+            this.classList.remove('active');
+            mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('.navbar ul li a').forEach(link => {
+            link.addEventListener('click', function() {
+                navbar.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Form validation and submission
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form elements
+                const name = this.querySelector('#name');
+                const email = this.querySelector('#email');
+                const phone = this.querySelector('#phone');
+                const date = this.querySelector('#date');
+                const time = this.querySelector('#time');
+                const guests = this.querySelector('#guests');
+                
+                // Simple validation
+                let isValid = true;
+                
+                if (name.value.trim() === '') {
+                    isValid = false;
+                    showError(name, 'Please enter your name');
+                } else {
+                    removeError(name);
+                }
+                
+                if (email.value.trim() === '') {
+                    isValid = false;
+                    showError(email, 'Please enter your email');
+                } else if (!validateEmail(email.value)) {
+                    isValid = false;
+                    showError(email, 'Please enter a valid email');
+                } else {
+                    removeError(email);
+                }
+                
+                if (phone.value.trim() === '') {
+                    isValid = false;
+                    showError(phone, 'Please enter your phone number');
+                } else {
+                    removeError(phone);
+                }
+                
+                if (date.value === '') {
+                    isValid = false;
+                    showError(date, 'Please select a date');
+                } else {
+                    removeError(date);
+                }
+                
+                if (time.value === '') {
+                    isValid = false;
+                    showError(time, 'Please select a time');
+                } else {
+                    removeError(time);
+                }
+                
+                if (guests.value === '') {
+                    isValid = false;
+                    showError(guests, 'Please select number of guests');
+                } else {
+                    removeError(guests);
+                }
+                
+                if (isValid) {
+                    // Show success message
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'success-message';
+                    successMessage.innerHTML = `
+                        <div style="background: #4BB543; color: white; padding: 20px; border-radius: 10px; text-align: center; margin-top: 20px;">
+                            <i class="fas fa-check-circle" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Reservation Successful!</h3>
+                            <p>Thank you for your reservation. We've sent a confirmation to ${email.value}.</p>
+                        </div>
+                    `;
+                    contactForm.parentNode.insertBefore(successMessage, contactForm.nextSibling);
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Remove success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.remove();
+                    }, 5000);
+                }
+            });
+        }
+        
+        function showError(input, message) {
+            const formGroup = input.parentElement;
+            const error = formGroup.querySelector('.error-message');
+            
+            if (error) {
+                error.innerText = message;
+            } else {
+                const errorElement = document.createElement('div');
+                errorElement.className = 'error-message';
+                errorElement.style.color = '#e74c3c';
+                errorElement.style.marginTop = '5px';
+                errorElement.style.fontSize = '0.9rem';
+                errorElement.innerText = message;
+                formGroup.appendChild(errorElement);
+            }
+            
+            input.style.borderColor = '#e74c3c';
+        }
+        
+        function removeError(input) {
+            const formGroup = input.parentElement;
+            const error = formGroup.querySelector('.error-message');
+            if (error) {
+                error.remove();
+            }
+            input.style.borderColor = '#ddd';
+        }
+        
+        function validateEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        // Menu item animation
+        const menuItems = document.querySelectorAll('.menu-item');
+        
+        const menuObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        menuItems.forEach(item => {
+            item.style.opacity = "0";
+            item.style.transform = "translateY(30px)";
+            item.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            menuObserver.observe(item);
+        });
+
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const menuItem = this.closest('.menu-item');
+                const itemName = menuItem.querySelector('h3').textContent.split('$')[0].trim();
+                
+                // Animation effect
+                this.innerHTML = '<i class="fas fa-check"></i>';
+                this.style.backgroundColor = '#2ecc71';
+                
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-plus"></i>';
+                    this.style.backgroundColor = '';
+                }, 1500);
+                
+                // Notification
+                const notification = document.createElement('div');
+                notification.style.position = 'fixed';
+                notification.style.bottom = '30px';
+                notification.style.left = '50%';
+                notification.style.transform = 'translateX(-50%)';
+                notification.style.backgroundColor = '#2ecc71';
+                notification.style.color = 'white';
+                notification.style.padding = '15px 30px';
+                notification.style.borderRadius = '50px';
+                notification.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+                notification.style.zIndex = '1000';
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.3s ease';
+                notification.innerHTML = `<i class="fas fa-check"></i> ${itemName} added to cart!`;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                }, 10);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            });
+        });
+
+        // Initialize animations on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate hero content
+            setTimeout(() => {
+                document.querySelector('.hero-content h1').classList.add('animate__animated', 'animate__fadeInDown');
+                document.querySelector('.hero-content p').classList.add('animate__animated', 'animate__fadeInUp');
+                document.querySelector('.hero-content .btn').classList.add('animate__animated', 'animate__pulse', 'animate__infinite');
+            }, 300);
+        });
+    </script>
+</body>
+</html>
